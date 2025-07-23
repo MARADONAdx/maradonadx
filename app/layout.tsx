@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* Background Music (hidden) */}
+        {/* 🎵 Background Music */}
         <audio
           src="/audio/background-music.mp3"
           autoPlay
@@ -33,13 +33,16 @@ export default function RootLayout({
 
         {children}
 
-        {/* Disable Inspect Script */}
+        {/* 🔐 Disable Inspect Script */}
         <script src="./disable-inspect.js"></script>
 
-        {/* ✅ Monetag Push Anti-Adblock Script */}
-        <script src="/monetag-push.js" async></script>
+        {/* 💸 Monetag Push Ads (example zone) */}
+        <script
+          async
+          src="https://puqzjz.com/pfe/current/tag.min.js?z=6613472"
+        ></script>
 
-        {/* ✅ PropellerAds or Monetag Service Worker Registration */}
+        {/* 🛠️ Optional: Service Worker Registration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
