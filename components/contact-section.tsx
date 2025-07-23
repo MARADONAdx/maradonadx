@@ -7,7 +7,7 @@ import { Send, Loader2 } from "lucide-react"
 import Link from "next/link"
 
 export function ContactSection() {
-  const discordLink = "https://discord.gg/YY6kbXWNalso"
+  const discordLink = "https://discord.gg/Mr3aJbWA"
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formStatus, setFormStatus] = useState<{
     type: "success" | "error" | null
