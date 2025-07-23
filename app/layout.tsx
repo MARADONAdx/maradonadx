@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   keywords: "web developer, ui/ux designer, creative director, portfolio",
   authors: [{ name: "MARADONAvx" }],
   viewport: "width=device-width, initial-scale=1",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -19,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        {/* Background Music */}
         <audio
           src="/audio/background-music.mp3"
           autoPlay
@@ -27,8 +28,29 @@ export default function RootLayout({
           className="sr-only"
           aria-label="Background music"
         ></audio>
+
         {children}
-         <script src="./disable-inspect.js"></script>
+
+        {/* Disable Inspect Script */}
+        <script src="./disable-inspect.js"></script>
+
+        {/* PropellerAds Service Worker Registration */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                  .register('/sw.js')
+                  .then(function(reg) {
+                    console.log('PropellerAds Service Worker Registered ✅', reg);
+                  })
+                  .catch(function(err) {
+                    console.warn('Service worker failed ❌', err);
+                  });
+              }
+            `,
+          }}
+        />
       </body>
     </html>
   )
