@@ -1,12 +1,13 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
+
+import { useState } from "react"
 import { Send, Loader2 } from "lucide-react"
 import Link from "next/link"
 
 export function ContactSection() {
-  const discordLink = "https://discord.gg/Mr3aJbWA"
+  const discordLink = "https://discord.gg/YY6kbXWNalso"
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formStatus, setFormStatus] = useState<{
     type: "success" | "error" | null
@@ -20,17 +21,6 @@ export function ContactSection() {
     message: "",
   })
 
-  const [captchaQuestion, setCaptchaQuestion] = useState("")
-  const [correctAnswer, setCorrectAnswer] = useState<number | null>(null)
-  const [userAnswer, setUserAnswer] = useState("")
-
-  useEffect(() => {
-    const num1 = Math.floor(Math.random() * 50) + 10
-    const num2 = Math.floor(Math.random() * 50) + 10
-    setCaptchaQuestion(`What is ${num1} + ${num2}?`)
-    setCorrectAnswer(num1 + num2)
-  }, [])
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -42,15 +32,6 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     setFormStatus({ type: null, message: "" })
-
-    if (parseInt(userAnswer) !== correctAnswer) {
-      setFormStatus({
-        type: "error",
-        message: "❌ CAPTCHA failed. Please try again.",
-      })
-      setIsSubmitting(false)
-      return
-    }
 
     try {
       if (!formData.name || !formData.email || !formData.subject || !formData.message) {
@@ -71,6 +52,7 @@ export function ContactSection() {
         return
       }
 
+      // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       setFormStatus({
@@ -84,7 +66,6 @@ export function ContactSection() {
         subject: "",
         message: "",
       })
-      setUserAnswer("")
     } catch (error) {
       setFormStatus({
         type: "error",
@@ -186,18 +167,6 @@ export function ContactSection() {
                   value={formData.message}
                   onChange={handleChange}
                   maxLength={1000}
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">{captchaQuestion}</label>
-                <input
-                  type="number"
-                  value={userAnswer}
-                  onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder="Enter the result"
-                  className="w-full bg-gray-900/50 border border-purple-500/30 text-white rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
-                  required
                 />
               </div>
 
