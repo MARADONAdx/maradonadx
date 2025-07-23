@@ -1,24 +1,35 @@
+// 🔒 Disable Right-Click
+document.addEventListener("contextmenu", (e) => e.preventDefault());
 
-// تعطيل زر الفأرة الأيمن
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-// تعطيل اختصارات أدوات المطور (مثل F12 و Ctrl+Shift+I)
-document.onkeydown = function(e) {
+// 🔒 Block Developer Tool Shortcuts
+document.addEventListener("keydown", (e) => {
   if (
     e.key === "F12" ||
-    (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) ||
-    (e.ctrlKey && e.key === "U")
+    (e.ctrlKey && e.shiftKey && ["I", "J", "C"].includes(e.key.toUpperCase())) ||
+    (e.ctrlKey && e.key === "u")
   ) {
-    return false;
+    e.preventDefault();
   }
-};
+});
 
-// اكتشاف إذا كانت أدوات المطور مفتوحة عن طريق مقارنة أبعاد النافذة
+// 🔒 Optional: Detect DevTools (Popup instead of blocking)
 setInterval(function () {
+  const threshold = 160;
   if (
-    window.outerWidth - window.innerWidth > 100 ||
-    window.outerHeight - window.innerHeight > 100
+    window.outerWidth - window.innerWidth > threshold ||
+    window.outerHeight - window.innerHeight > threshold
   ) {
-    document.body.innerHTML = "<h1>🚫 تم تعطيل الفحص</h1>";
+    if (!document.getElementById("inspect-warning")) {
+      const warn = document.createElement("div");
+      warn.id = "inspect-warning";
+      warn.innerText = "🚫 Inspection is blocked";
+      warn.style.cssText =
+        "position:fixed;top:20px;left:50%;transform:translateX(-50%);" +
+        "background:#000;color:#fff;padding:10px 20px;border-radius:8px;" +
+        "font-family:sans-serif;font-size:14px;z-index:99999";
+      document.body.appendChild(warn);
+
+      setTimeout(() => warn.remove(), 4000);
+    }
   }
 }, 1000);
