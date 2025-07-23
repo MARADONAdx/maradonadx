@@ -1,5 +1,3 @@
-"use client"
-
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
@@ -36,7 +34,7 @@ export default function RootLayout({
         {/* 🔐 Disable Inspect Script */}
         <script src="./disable-inspect.js"></script>
 
-        {/* 💸 Monetag Push Ads (example zone) */}
+        {/* 💸 Monetag Push Ads Script (Example - replace if needed) */}
         <script
           async
           src="https://puqzjz.com/pfe/current/tag.min.js?z=6613472"
