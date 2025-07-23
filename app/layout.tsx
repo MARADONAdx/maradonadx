@@ -1,3 +1,5 @@
+"use client"
+
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
@@ -19,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* Background Music */}
+        {/* Background Music (hidden) */}
         <audio
           src="/audio/background-music.mp3"
           autoPlay
@@ -34,7 +36,10 @@ export default function RootLayout({
         {/* Disable Inspect Script */}
         <script src="./disable-inspect.js"></script>
 
-        {/* PropellerAds Service Worker Registration */}
+        {/* ✅ Monetag Push Anti-Adblock Script */}
+        <script src="/monetag-push.js" async></script>
+
+        {/* ✅ PropellerAds or Monetag Service Worker Registration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -42,7 +47,7 @@ export default function RootLayout({
                 navigator.serviceWorker
                   .register('/sw.js')
                   .then(function(reg) {
-                    console.log('PropellerAds Service Worker Registered ✅', reg);
+                    console.log('Service worker registered ✅', reg);
                   })
                   .catch(function(err) {
                     console.warn('Service worker failed ❌', err);
