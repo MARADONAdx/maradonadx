@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function HeroSection() {
-  const discordLink = "https://discord.gg/YY6kbXWNalso"
+  const discordLink = "https://discord.gg/Mr3aJbWA"
 
   return (
     <section id="home" className="min-h-screen flex items-center justify-center px-6 relative z-10">

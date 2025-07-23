@@ -2,7 +2,7 @@ import { Check, ArrowRight } from "lucide-react"
 import Link from "next/link"
 
 export function PricingSection() {
-  const discordLink = "https://discord.gg/YY6kbXWN"
+  const discordLink = "https://discord.gg/Mr3aJbWA"
 
   const plans = [
     {
