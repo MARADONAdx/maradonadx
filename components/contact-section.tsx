@@ -1,13 +1,12 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Send, Loader2 } from "lucide-react"
 import Link from "next/link"
 
 export function ContactSection() {
-  const discordLink = "https://discord.gg/YY6kbXWNalso"
+  const discordLink = "https://discord.gg/Mr3aJbWA"
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [formStatus, setFormStatus] = useState<{
     type: "success" | "error" | null
@@ -21,6 +20,19 @@ export function ContactSection() {
     message: "",
   })
 
+  // 🧠 CAPTCHA states
+  const [captchaQuestion, setCaptchaQuestion] = useState("")
+  const [correctAnswer, setCorrectAnswer] = useState<number | null>(null)
+  const [userAnswer, setUserAnswer] = useState("")
+
+  // 📌 Generate new CAPTCHA on load
+  useEffect(() => {
+    const num1 = Math.floor(Math.random() * 10) + 1
+    const num2 = Math.floor(Math.random() * 10) + 1
+    setCaptchaQuestion(`ما هو حاصل ${num1} + ${num2}؟`)
+    setCorrectAnswer(num1 + num2)
+  }, [])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
@@ -32,6 +44,16 @@ export function ContactSection() {
     e.preventDefault()
     setIsSubmitting(true)
     setFormStatus({ type: null, message: "" })
+
+    // ✅ CAPTCHA check
+    if (parseInt(userAnswer) !== correctAnswer) {
+      setFormStatus({
+        type: "error",
+        message: "❌ الجواب خاطئ، حاول مرة أخرى.",
+      })
+      setIsSubmitting(false)
+      return
+    }
 
     try {
       if (!formData.name || !formData.email || !formData.subject || !formData.message) {
@@ -66,6 +88,7 @@ export function ContactSection() {
         subject: "",
         message: "",
       })
+      setUserAnswer("")
     } catch (error) {
       setFormStatus({
         type: "error",
@@ -170,6 +193,19 @@ export function ContactSection() {
                 />
               </div>
 
+              {/* ✅ CAPTCHA */}
+              <div>
+                <label className="block text-sm font-medium text-gray-300 mb-1">{captchaQuestion}</label>
+                <input
+                  type="number"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  placeholder="اكتب الإجابة هنا"
+                  className="w-full bg-gray-900/50 border border-purple-500/30 text-white rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
+                  required
+                />
+              </div>
+
               <div className="flex space-x-4">
                 <button
                   type="submit"
@@ -195,48 +231,6 @@ export function ContactSection() {
                     className="border border-purple-500/50 text-white hover:bg-purple-500/20 bg-transparent py-3 px-4 rounded-lg transition-colors"
                   >
                     Join Discord
-                    import { useEffect, useState } from "react";
-
-export default function ContactSection() {
-  const [captchaQuestion, setCaptchaQuestion] = useState("");
-  const [correctAnswer, setCorrectAnswer] = useState<number | null>(null);
-  const [userAnswer, setUserAnswer] = useState("");
-
-  useEffect(() => {
-    const num1 = Math.floor(Math.random() * 10) + 1;
-    const num2 = Math.floor(Math.random() * 10) + 1;
-    setCaptchaQuestion(`ما هو حاصل ${num1} + ${num2}؟`);
-    setCorrectAnswer(num1 + num2);
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    if (parseInt(userAnswer) !== correctAnswer) {
-      e.preventDefault();
-      alert("❌ الجواب خاطئ، حاول مرة أخرى.");
-      return;
-    }
-    alert("✅ تم إرسال النموذج بنجاح!");
-    // تابع إرسال البيانات هنا إذا كنت تستخدم API
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="name" placeholder="اسمك" required /><br />
-      <input type="email" name="email" placeholder="بريدك الإلكتروني" required /><br />
-
-      <label style={{ fontWeight: "bold" }}>{captchaQuestion}</label><br />
-      <input
-        type="number"
-        value={userAnswer}
-        onChange={(e) => setUserAnswer(e.target.value)}
-        required
-      /><br />
-
-      <button type="submit">إرسال</button>
-    </form>
-  );
-}
-
                   </button>
                 </Link>
               </div>
