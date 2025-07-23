@@ -27,16 +27,15 @@ export function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-black/20 backdrop-blur-sm">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">
-        <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-white">
-          <div className="w-10 h-10 relative">
-            <Image
-              src="/images/logo.png"
-              alt="MARADONAvx Logo"
-              fill
-              className="object-contain rounded-full"
-              priority
-            />
-          </div>
+        <Link href="/" className="flex items-center space-x-3 text-xl font-bold text-white">
+          <Image
+            src="/images/logo.png"
+            alt="MARADONAvx Logo"
+            width={36}
+            height={36}
+            className="rounded-full object-cover"
+            priority
+          />
           <span>
             MARADONA<span className="text-purple-400">vx</span>
           </span>
