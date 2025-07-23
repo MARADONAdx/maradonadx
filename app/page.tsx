@@ -6,35 +6,40 @@ import { PricingSection } from "@/components/pricing-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { ParticleBackground } from "@/components/particle-background"
-import Image from "next/image" // Import Image component
 
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Static Background Image */}
-      <Image
-        src="/images/abstract-foliage.png" // New background image
-        alt="Abstract foliage background"
-        fill
-        className="object-cover z-0"
-        priority // Load immediately
-      />
+      {/* 🎬 Background Video */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+      >
+        <source src="/videos/background.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
 
-      {/* Overlay for better text readability */}
+      {/* 🔲 Dark Overlay */}
       <div className="absolute inset-0 bg-black/60 z-10"></div>
 
-      {/* Particle Background - placed above the image but below content */}
+      {/* ✨ Particle Background */}
       <ParticleBackground />
 
-      <Header />
-      <main className="relative z-20">
-        <HeroSection />
-        <ProjectsSection />
-        <SkillsSection />
-        <PricingSection />
-        <ContactSection />
-      </main>
-      <Footer />
+      {/* 🌐 Site Content */}
+      <div className="relative z-20">
+        <Header />
+        <main>
+          <HeroSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <PricingSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
     </div>
   )
 }
