@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
 import { ProjectsSection } from "@/components/projects-section"
@@ -6,7 +8,7 @@ import { PricingSection } from "@/components/pricing-section"
 import { ContactSection } from "@/components/contact-section"
 import { Footer } from "@/components/footer"
 import { ParticleBackground } from "@/components/particle-background"
-import Image from "next/image" // Import Image component
+import Image from "next/image"
 import { useState } from "react"
 
 export default function Home() {
