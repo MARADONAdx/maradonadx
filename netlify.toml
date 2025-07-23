@@ -10,6 +10,13 @@
   to = "/index.html"
   status = 200
 
+# Block bad bots by User-Agent
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 403
+  conditions = { User-Agent = ["BadBot", "curl", "Scrapy", "python-requests"] }
+
 [[headers]]
   for = "/*"
   [headers.values]
@@ -19,6 +26,8 @@
     Referrer-Policy = "strict-origin-when-cross-origin"
     Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
     Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self' https:; connect-src 'self' https:; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'"
+    Cache-Control = "no-store"
+    Server = ""
 
 [[headers]]
   for = "/api/*"
@@ -27,19 +36,7 @@
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 
-# Rate limiting for API endpoints
+# Edge function for rate-limiting
 [[edge_functions]]
   function = "rate-limit"
   path = "/api/*"
-[headers]
-  [[headers]]
-    for = "/*"
-    [headers.values]
-      Server = ""                           # Hide Netlify server info
-      Cache-Control = "no-store"           # Prevents sensitive caching
-
-[[redirects]]
-  from = "/*"
-  to = "/"
-  status = 403
-  conditions = { User-Agent = ["BadBot", "curl", "Scrapy", "python-requests"] } # Block bots
