@@ -5,18 +5,6 @@
 [build.environment]
   NODE_VERSION = "18"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-
-# Block bad bots by User-Agent
-[[redirects]]
-  from = "/*"
-  to = "/"
-  status = 403
-  conditions = { User-Agent = ["BadBot", "curl", "Scrapy", "python-requests"] }
-
 [[headers]]
   for = "/*"
   [headers.values]
@@ -36,7 +24,17 @@
     Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
     Access-Control-Allow-Headers = "Content-Type, Authorization"
 
-# Edge function for rate-limiting
+[[redirects]]
+  from = "/block-bots/*"
+  to = "/"
+  status = 403
+  conditions = { User-Agent = ["BadBot", "curl", "Scrapy", "python-requests"] }
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 [[edge_functions]]
   function = "rate-limit"
   path = "/api/*"
