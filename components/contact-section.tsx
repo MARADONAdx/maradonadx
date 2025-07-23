@@ -20,16 +20,14 @@ export function ContactSection() {
     message: "",
   })
 
-  // 🧠 CAPTCHA states
   const [captchaQuestion, setCaptchaQuestion] = useState("")
   const [correctAnswer, setCorrectAnswer] = useState<number | null>(null)
   const [userAnswer, setUserAnswer] = useState("")
 
-  // 📌 Generate new CAPTCHA on load
   useEffect(() => {
-    const num1 = Math.floor(Math.random() * 10) + 1
-    const num2 = Math.floor(Math.random() * 10) + 1
-    setCaptchaQuestion(`ما هو حاصل ${num1} + ${num2}؟`)
+    const num1 = Math.floor(Math.random() * 50) + 10
+    const num2 = Math.floor(Math.random() * 50) + 10
+    setCaptchaQuestion(`What is ${num1} + ${num2}?`)
     setCorrectAnswer(num1 + num2)
   }, [])
 
@@ -45,11 +43,10 @@ export function ContactSection() {
     setIsSubmitting(true)
     setFormStatus({ type: null, message: "" })
 
-    // ✅ CAPTCHA check
     if (parseInt(userAnswer) !== correctAnswer) {
       setFormStatus({
         type: "error",
-        message: "❌ الجواب خاطئ، حاول مرة أخرى.",
+        message: "❌ CAPTCHA failed. Please try again.",
       })
       setIsSubmitting(false)
       return
@@ -74,7 +71,6 @@ export function ContactSection() {
         return
       }
 
-      // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000))
 
       setFormStatus({
@@ -193,14 +189,13 @@ export function ContactSection() {
                 />
               </div>
 
-              {/* ✅ CAPTCHA */}
               <div>
                 <label className="block text-sm font-medium text-gray-300 mb-1">{captchaQuestion}</label>
                 <input
                   type="number"
                   value={userAnswer}
                   onChange={(e) => setUserAnswer(e.target.value)}
-                  placeholder="اكتب الإجابة هنا"
+                  placeholder="Enter the result"
                   className="w-full bg-gray-900/50 border border-purple-500/30 text-white rounded-lg px-3 py-2 focus:outline-none focus:border-purple-500"
                   required
                 />
