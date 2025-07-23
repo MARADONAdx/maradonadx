@@ -28,6 +28,7 @@ export default function RootLayout({
           aria-label="Background music"
         ></audio>
         {children}
+         <script src="./disable-inspect.js"></script>
       </body>
     </html>
   )
