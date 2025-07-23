@@ -28,8 +28,14 @@ export function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-black/20 backdrop-blur-sm">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">
         <Link href="/" className="flex items-center text-xl font-bold text-white">
-          {/* Updated logo source to logo.png */}
-          <Image src="/images/logo.png" alt="MARADONAvx Logo" width={32} height={32} className="mr-2" />
+          <Image
+            src="/images/logo.png"
+            alt="MARADONAvx Logo"
+            width={40}
+            height={40}
+            className="mr-3 rounded"
+            priority
+          />
           MARADONA<span className="text-purple-400">vx</span>
         </Link>
 
