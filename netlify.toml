@@ -31,3 +31,15 @@
 [[edge_functions]]
   function = "rate-limit"
   path = "/api/*"
+[headers]
+  [[headers]]
+    for = "/*"
+    [headers.values]
+      Server = ""                           # Hide Netlify server info
+      Cache-Control = "no-store"           # Prevents sensitive caching
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 403
+  conditions = { User-Agent = ["BadBot", "curl", "Scrapy", "python-requests"] } # Block bots
