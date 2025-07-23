@@ -195,6 +195,48 @@ export function ContactSection() {
                     className="border border-purple-500/50 text-white hover:bg-purple-500/20 bg-transparent py-3 px-4 rounded-lg transition-colors"
                   >
                     Join Discord
+                    import { useEffect, useState } from "react";
+
+export default function ContactSection() {
+  const [captchaQuestion, setCaptchaQuestion] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState<number | null>(null);
+  const [userAnswer, setUserAnswer] = useState("");
+
+  useEffect(() => {
+    const num1 = Math.floor(Math.random() * 10) + 1;
+    const num2 = Math.floor(Math.random() * 10) + 1;
+    setCaptchaQuestion(`ما هو حاصل ${num1} + ${num2}؟`);
+    setCorrectAnswer(num1 + num2);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    if (parseInt(userAnswer) !== correctAnswer) {
+      e.preventDefault();
+      alert("❌ الجواب خاطئ، حاول مرة أخرى.");
+      return;
+    }
+    alert("✅ تم إرسال النموذج بنجاح!");
+    // تابع إرسال البيانات هنا إذا كنت تستخدم API
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" name="name" placeholder="اسمك" required /><br />
+      <input type="email" name="email" placeholder="بريدك الإلكتروني" required /><br />
+
+      <label style={{ fontWeight: "bold" }}>{captchaQuestion}</label><br />
+      <input
+        type="number"
+        value={userAnswer}
+        onChange={(e) => setUserAnswer(e.target.value)}
+        required
+      /><br />
+
+      <button type="submit">إرسال</button>
+    </form>
+  );
+}
+
                   </button>
                 </Link>
               </div>
