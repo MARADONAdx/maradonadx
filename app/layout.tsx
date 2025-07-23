@@ -33,37 +33,6 @@ export default function RootLayout({
 
         {/* 🔐 Disable Inspect Script */}
         <script src="./disable-inspect.js"></script>
-
-        {/* 💸 Monetag Push Ads */}
-        <script
-          async
-          src="https://puqzjz.com/pfe/current/tag.min.js?z=6613472"
-        ></script>
-
-        {/* 💥 Monetag OnClick Ads */}
-        <script
-          type="text/javascript"
-          src="https://puqzjz.com/pfe/current/tag.min.js?z=9613551"
-          async
-        ></script>
-
-        {/* 🛠️ Optional: Service Worker Registration */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                  .register('/sw.js')
-                  .then(function(reg) {
-                    console.log('Service worker registered ✅', reg);
-                  })
-                  .catch(function(err) {
-                    console.warn('Service worker failed ❌', err);
-                  });
-              }
-            `,
-          }}
-        />
       </body>
     </html>
   )
