@@ -38,3 +38,6 @@
 [[edge_functions]]
   function = "rate-limit"
   path = "/api/*"
+[[edge_functions]]
+function = "ddos-protect"
+path = "/*"
