@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
+// NOTE: next.config.mjs takes priority — this file is kept as a fallback only.
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -11,8 +11,6 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
-  output: "export",
 }
 
 module.exports = nextConfig

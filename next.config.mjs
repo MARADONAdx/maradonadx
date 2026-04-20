@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -46,13 +45,6 @@ const nextConfig = {
         ],
       },
     ]
-  },
-  // Helps prevent DDoS by limiting the size of requests
-  api: {
-    bodyParser: {
-      sizeLimit: '500kb',
-    },
-    responseLimit: '8mb',
   },
   poweredByHeader: false, // Remove X-Powered-By header
 }
