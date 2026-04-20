@@ -23,20 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
-        {/* 🎵 Background Music */}
-        <audio
-          src="/audio/background-music.mp3"
-          autoPlay
-          loop
-          controls
-          className="sr-only"
-          aria-label="Background music"
-        ></audio>
-
         {children}
 
         {/* 🔐 Disable Inspect Script */}
-        <script src="./disable-inspect.js"></script>
+        <script src="/disable-inspect.js"></script>
       </body>
     </html>
   )
