@@ -1,6 +1,8 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata, Viewport } from "next"
+import { SecurityWidget } from "@/components/security-widget"
+import { MouseGlow } from "@/components/mouse-glow"
 
 export const metadata: Metadata = {
   title: "MARADONAvx - Creative Developer Portfolio",
@@ -23,6 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased">
+        <MouseGlow />
+        <SecurityWidget />
         {children}
 
         {/* 🔐 Disable Inspect Script */}

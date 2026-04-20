@@ -5,18 +5,6 @@ import Link from "next/link"
 import Image from "next/image"
 
 export default function Home() {
-  const glowRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (glowRef.current) {
-        glowRef.current.style.left = `${e.clientX}px`
-        glowRef.current.style.top = `${e.clientY}px`
-      }
-    }
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
@@ -35,18 +23,7 @@ export default function Home() {
       {/* ── Dark gradient overlay ── */}
       <div className="absolute inset-0 z-10 bg-gradient-to-b from-black/70 via-purple-950/30 to-black/80" />
 
-      {/* ── Mouse-following purple glow ── */}
-      <div
-        ref={glowRef}
-        className="pointer-events-none fixed z-20 -translate-x-1/2 -translate-y-1/2 rounded-full"
-        style={{
-          width: "480px",
-          height: "480px",
-          background: "radial-gradient(circle, rgba(147,51,234,0.18) 0%, rgba(109,40,217,0.08) 45%, transparent 70%)",
-          filter: "blur(2px)",
-          transition: "left 0.08s ease-out, top 0.08s ease-out",
-        }}
-      />
+
 
       {/* ── Content ── */}
       <div className="relative z-30 flex flex-col min-h-screen">
